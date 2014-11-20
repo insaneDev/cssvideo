@@ -5,77 +5,10 @@ module.exports = function (grunt) {
 	grunt.initConfig({
 
 		pkg: grunt.file.readJSON('package.json'),
-
-		express: {
-
-			options: {
-				port: 9000,
-				serverreload: true
-			},
-
-			dev: {
-				options: {
-					bases: [
-						'public',
-						'public/templates' /* [1] */
-					]
-				}
-			},
-
-			prod: {
-				options: {
-					bases: [
-						'.public',
-						'.public/templates' /* [1] */
-					]
-				}
-			}
-		},
-
-		requirejs: {
-			compile: {
-				options: {
-					baseUrl: 'public',
-					mainConfigFile: 'public/js/main.js',
-					dir: '.public',
-					optimize: 'uglify',
-					modules: [
-						{ name: 'js/main' }
-					]
-				}
-			}
-		},
-
-		karma: {
-
-			options: {
-				frameworks: ['mocha', 'requirejs', 'chai'],
-				reporters: ['spec'],
-				files: [
-					{ pattern: 'public/components/**/*.js', included: false },
-					{ pattern: 'public/js/**/*.js', included: false },
-					{ pattern: 'test/browser/utils.js', included: false },
-					{ pattern: 'test/browser/unit/**/*.js', included: false },
-					'test/browser/main.js'
-				]
-			},
-
-			unit: {
-				options: {
-					port: 9999,
-					browsers: ['PhantomJS'],
-					autoWatch: false,
-					singleRun: true
-				}
-			}
-
-			/*integration: {
-				...
-			}*/
-		},
+		
 
 		jshint: {
-			all: ['Gruntfile.js', 'public/js/controllers/**/*.js']
+			all: ['Gruntfile.js', 'src/**/*.js']
 		},
 
 		copy: {
@@ -106,7 +39,7 @@ module.exports = function (grunt) {
 
 				options:{
 					
-					target: ['*/jpeg/*.*'],
+					target: ['*/jpeg/*'],
 
 					fixDirLevel: false,
 
@@ -124,20 +57,8 @@ module.exports = function (grunt) {
 			  "<%= grunt.template.today(\"yyyy-mm-dd\") %> */ \n"
 			},
 			dist: {
-			  src: ['public/js/controllers/*/*.[^\.min]*.js'],
-			  dest: 'dist/js/controllers.js'
-			},
-			dist0: {
-			  src: ['public/js/directives/*/*.[^\.min]*.js'],
-			  dest: 'dist/js/directives.js'
-			},
-			dist1: {
-			  src: ['public/js/modules/*/*[^\.min|^Gruntfile].js'],
-			  dest: 'dist/js/modules.js'
-			},
-			distCss: {
-			  src: ['public/css/**/*[^\.min].css'],
-			  dest: 'dist/css/<%= pkg.name %>.css'
+			  src: ['src/[^\.min]*.js'],
+			  dest: 'dist/js/<%= pkg.name %>.js'
 			}
 		},
 
@@ -148,19 +69,14 @@ module.exports = function (grunt) {
 		  },
 		  dist: {
 			files: {
-			  'dist/js/controllers.min.js': ['dist/js/controllers.js'],
-			  'dist/js/directives.min.js': ['dist/js/directives.js'],
-			  //'dist/js/modules.min.js': ['dist/js/modules.js'],
-			  'dist/<%= pkg.name %>.min.js': ['<%= concat.dist0.dest %>', '<%= concat.dist.dest %>']
+			  'dist/js/<%= pkg.name %>.min.js': ['dist/js/<%= pkg.name %>.js']
 			}
 		  }
 		}
 		
 	});
 
-	grunt.loadNpmTasks('grunt-express');
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
-	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-copy');

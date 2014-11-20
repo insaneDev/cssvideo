@@ -4,7 +4,7 @@
 **.sass**
 **.sass-cache**
 **.min.js**
-assets/jpeg
 bower_components
 node_modules
 dist
+**COMMANDS**
