@@ -1,0 +1,24 @@
+{
+  "name": "videosprite",
+  "version": "0.0.0",
+  "authors": [
+    "Oscar <fu.wire@gmail.com>"
+  ],
+  "description": "proof of concept",
+  "keywords": [
+    "css-sprite",
+    "html5",
+    "css"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1"
+  }
+}

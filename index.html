@@ -1,0 +1,58 @@
+<!doctype html>
+	<html lang=en-us>
+	<head>
+		<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript" src="src/animate.js"></script>
+		<link rel="stylesheet" type="text/css" href="assets/trailer.css">
+	</head>
+	<body>
+		<!--
+			We´re looking to play a sprite video with css class .trailer
+			So we´re using data-include attribute to load the CSS definidtion
+			Where that class isdefined.
+
+			*Heads up*
+
+			if class allready exists CSS file won´t be loaded.
+		-->
+		<div class="trailer">
+			<div id="demo" rel="videosprite" class="video" data-class=".trailer" data-include="assets/trailer.css"></div>
+		</div>
+
+		<style type="text/css">
+			body{
+				background-color: #000;
+			}
+			#demo{
+				border: 1px solid #000;
+				width: 100%;
+				height: 100vh;
+				background-color: #000;
+				margin: 0 auto;
+
+				user-select: none;
+				-moz-user-select: none;
+				-o-user-select: none;
+			}
+		</style>
+
+		<script type="text/javascript">
+			
+			var element = document.querySelectorAll('#demo');
+
+			var p = VideoPuppeteer.create(element[0], {
+				type: "css",
+				do_once: true,
+				autostart: true,
+				width: null,
+				height: null,
+				fps: 24,
+				frames: 600,
+				initFrame: 0,
+				stop_after: 600,
+				mask: 's%d'
+			});
+
+		</script>
+	</body>
+</html>
